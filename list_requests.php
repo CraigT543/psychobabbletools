@@ -17,8 +17,9 @@
 * @package   OpenEMR
 * @author    Rod Roark <rod@sunsetsystems.com>
 *
-* This version has been modified by Craig Tucker, 2/11/2016 to automatically load
+* This version has been modified by Craig Tucker, 2/12/2016 to automatically load
 * the appropriate patient in OpenEMR when a form is loaded.
+*/
 */
 
 $sanitize_all_escapes = true;
@@ -288,11 +289,11 @@ if ($result['errmsg']) {
 		$messageid = $v2[1]['messageid'];
 		$ptname = patientNameFromLogin($v2[1]['user']);
 		echo "  <td>" . text($v2[1]['user']) . "</td>\n";
-		echo "  <td>" . text($ptname       ) . "</td>\n";
+		echo "  <td style='cursor:pointer;color:blue;' onclick=\"openPatient()\">" .text($ptname       ) . "</td>\n";		
 		echo "  <td style='cursor:pointer;color:blue;'";
-		echo " onclick=\"openMessage(" .
+		echo " onclick=\"openPatient();setTimeout(function(){openMessage(" .
 			 "'" . addslashes($messageid)      . "'" .
-			 ")\">" . text($v2[1]['datetime']) . "</td>\n";
+		")}, 2000);\">" . text($v2[1]['datetime']) . "</td>\n";
 		echo "  <td>" . text($v2[1]['user'] == $v2[1]['fromuser'] ?
 			 xl('Message from patient') : xl('Message to patient')) . "</td>\n";
 		echo "  <td align='center'><input type='checkbox' name='form_msg_cb[" .
