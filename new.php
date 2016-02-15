@@ -18,10 +18,8 @@
  * @link    http://www.open-emr.org
  * 
  * This also contains some minor modifications from Craig Tucker, craigtuckerlcsw@gmail.com
- * 2/15/2016 to run with CF7 & CFDB (change intval to floatval). It contains Rod Roark's patch 
+ * 2/15/2016 to run with CF7 & CFDB (change intval to floatval). It also contains Rod Roark's patch 
  * from https://github.com/sunsetsystems/openemr/commit/6eb5547e9a3f63f8650e8e0eb9fa3712829c7cf8
- * with a modification, removal of the ' && $source == 'F' condition for the cms_field_to_lbf
- * function.
  * 
  */
 
@@ -451,7 +449,7 @@ function validate(f) {
       if (isset($shrow[$field_id])) $currvalue = $shrow[$field_id];
     } else {
       // $currvalue = lbf_current_value($frow, $formid, $is_lbf ? 0 : $encounter);
-      if (!$formid && $portalres) {
+      if (!$formid && $source == 'F' &&  $portalres) {
         $currvalue = cms_field_to_lbf($data_type, $field_id, $portalres['fields']);
       }
       if ($currvalue === '') {
