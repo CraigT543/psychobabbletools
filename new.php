@@ -16,13 +16,13 @@
  * @package OpenEMR
  * @author  Rod Roark <rod@sunsetsystems.com>
  * @link    http://www.open-emr.org
- *
- * Modified by Craig Tucker craigtuckerlcsw@gmail.com on 2/15/2016 to improve importing of LBF 
- * forms for the CMS patient porrtal I have changed intval to floatval (to facilitate using CF7)
- * and have added another instance of cms_field_to_lbf to change input values when selecting input
- * of CMS portal data.  It also includes a paatch from Rod Roark found at:
- * https://github.com/sunsetsystems/openemr/commit/6eb5547e9a3f63f8650e8e0eb9fa3712829c7cf8
- *
+ * 
+ * This also contains some minor modifications from Craig Tucker, craigtuckerlcsw@gmail.com
+ * 2/15/2016 to run with CF7 & CFDB (change intval to floatval). It contains Rod Roark's patch 
+ * from https://github.com/sunsetsystems/openemr/commit/6eb5547e9a3f63f8650e8e0eb9fa3712829c7cf8
+ * with a modification, removal of the ' && $source == 'F' condition for the cms_field_to_lbf
+ * function.
+ * 
  */
 
 //SANITIZE ALL ESCAPES
@@ -175,7 +175,6 @@ if ($_POST['bn_save']) {
         "pid = ?, encounter = ?, field_id = ?, last_update = NOW(), " .
         "user_id = ?, field_value = ?",
         array($pid, $encounter, $field_id, $_SESSION['authUserID'], $value));
-		
       continue;
     }
     else if ($source == 'V') {
@@ -446,13 +445,13 @@ function validate(f) {
     }
 
     $currvalue  = '';
-	  							
+
     if ($frow['edit_options'] == 'H') {
       // This data comes from static history
       if (isset($shrow[$field_id])) $currvalue = $shrow[$field_id];
     } else {
       // $currvalue = lbf_current_value($frow, $formid, $is_lbf ? 0 : $encounter);
-      if (!$formid && $source == 'F' && $portalres) {
+      if (!$formid && $portalres) {
         $currvalue = cms_field_to_lbf($data_type, $field_id, $portalres['fields']);
       }
       if ($currvalue === '') {
@@ -606,14 +605,9 @@ function validate(f) {
       if ($frow['edit_options'] == 'H')
         echo generate_display_field($frow, $currvalue);
       else
-		if ($portalid) {
-		$currvalue = cms_field_to_lbf($data_type, $field_id, $portalres['fields']);	
-		generate_form_field($frow, $currvalue);	
-		}else{
         generate_form_field($frow, $currvalue);
-		}
     }
-	
+
     // Append to historical data of other dates for this item.
     foreach ($historical_ids as $key => $dummy) {
       $value = lbf_current_value($frow, $key, 0);
@@ -683,6 +677,6 @@ if (!$formid && $GLOBALS['gbl_portal_cms_enable'] && $cmsportal_login && !$porta
 }
 ?>
 </script>
-<?php
+
 </body>
 </html>
