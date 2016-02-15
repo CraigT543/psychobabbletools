@@ -20,7 +20,8 @@
  * Modified by Craig Tucker craigtuckerlcsw@gmail.com on 2/15/2016 to improve importing of LBF 
  * forms for the CMS patient porrtal I have changed intval to floatval (to facilitate using CF7)
  * and have added another instance of cms_field_to_lbf to change input values when selecting input
- * of CMS portal data.
+ * of CMS portal data.  It also includes a paatch from Rod Roark found at:
+ * https://github.com/sunsetsystems/openemr/commit/6eb5547e9a3f63f8650e8e0eb9fa3712829c7cf8
  *
  */
 
