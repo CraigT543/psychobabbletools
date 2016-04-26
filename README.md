@@ -3,16 +3,16 @@ I am focusing here on modifing Rod Roark's patient portal to work with CFDB.  CF
 
 In order for this modification to work, the CFDB plugin needs to be added to Wordpress.  The CFDB table needs to be modified to have an ID field.  In phpMyAdmin SQL tab:
 
-ALTER TABLE wp_cf7dbplugin_submits ADD ID INT NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (ID);
+    ALTER TABLE wp_cf7dbplugin_submits ADD ID INT NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (ID);
 
 You will also need to be running a forms application like CF7 or Ninja Forms etc.
 
 I have modified the folloing of Rod Roark's files:
 
-/openemr/interface/cmsportal/list_requests.php
+    /openemr/interface/cmsportal/list_requests.php
 
-/openemr/interface/cmsportal/portal.inc.php
+    /openemr/interface/cmsportal/portal.inc.php
 
-/openemr/interface/forms/LBF/new.php
+    /openemr/interface/forms/LBF/new.php
 
-
+    /wordpress/wp-content/plugins/sunset-patient-portal/webserve.php
