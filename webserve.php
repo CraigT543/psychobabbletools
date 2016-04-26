@@ -7,7 +7,7 @@ error_reporting(E_ALL | E_STRICT);
 // http://www.webopius.com/content/139/using-the-wordpress-api-from-pages-outside-of-wordpress
 // ... including the reader comments.
 //
-// 2/10/2016 This is a modification of Rod's work by Craig Tucker for use with CF7 and CFDB in 
+// 4/25/2016 This is a modification of Rod's work by Craig Tucker for use with CF7 and CFDB in 
 // WordPress. All references to NinjaForms have been deleted.
 
 define('WP_USE_THEMES', false);
