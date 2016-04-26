@@ -6,18 +6,9 @@ error_reporting(E_ALL | E_STRICT);
 // For using the WordPress API from an external program such as this, see:
 // http://www.webopius.com/content/139/using-the-wordpress-api-from-pages-outside-of-wordpress
 // ... including the reader comments.
-// Rod's original work is found at:
-// http://www.open-emr.org/wiki/index.php/Patient_Portal
 //
 // 2/10/2016 This is a modification of Rod's work by Craig Tucker for use with CF7 and CFDB in 
 // WordPress. All references to NinjaForms have been deleted.
-// 
-// In order for this to work you will need to make the following modification:
-// In /openemr/interface/cmsportal/upload_form.php line 46 change intval to floatval --
-// e.g  $postid = empty($_REQUEST['postid' ]) ? 0 : floatval($_REQUEST['postid' ])
-//
-// You will also need to create forms with lables in CF7 with fields that match openemr fields. 
-// I just copied field names used from Rod's Jinja Forms.
 
 define('WP_USE_THEMES', false);
 require('../../../wp-load.php');
@@ -250,8 +241,7 @@ function action_getpost($postid) {
   $out['post'] = array();
   $out['uploads'] = array();
 
-    // wp_posts has one row for each submitted form.
-    // wp_nf_objectmeta includes a set of rows for each defined form.
+       // cf7dbplugin_submits includes a set of rows for each defined form.
     $query =
 	"SELECT submit_time, form_name, field_value " .
 	"FROM {$wpdb->prefix}cf7dbplugin_submits " .
@@ -356,20 +346,12 @@ function action_checkptform($patient, $form) {
   global $wpdb, $out;
   $out['list'] = array();
     $query =
-      "SELECT p.ID FROM " .
-      "$wpdb->users AS u, " .
-      "$wpdb->posts AS p, " .
-      "$wpdb->postmeta AS pm, " .
-      "{$wpdb->prefix}nf_objectmeta AS om " .
-      "WHERE u.user_login = %s AND " .
-      "p.post_author = u.id AND " .
-      "p.post_type = 'nf_sub' AND " .
-      "pm.post_id = p.ID AND " .
-      "pm.meta_key = 'form_id' AND " .
-      "om.object_id = pm.meta_value AND " .
-      "om.meta_key = 'form_title' AND " .
-      "om.meta_value = %s " .
-      "ORDER BY p.ID LIMIT 1";
+	"SELECT submit_time AS ID " .
+	"FROM {$wpdb->prefix}cf7dbplugin_submits " .
+	"WHERE field_order = 9999 AND " .
+	"field_value = %s AND " .
+	"form_name = %s " .
+	"ORDER BY ID LIMIT 1 ";
     $queryp = $wpdb->prepare($query, array($patient, $form));
     if (empty($queryp)) {
       $out['errmsg'] = "Internal error: \"$query\" \"$patient\" \"$form\"";
