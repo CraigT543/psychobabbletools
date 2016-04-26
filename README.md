@@ -10,4 +10,9 @@ You will also need to be running a forms application like CF7 or Ninja Forms etc
 I have modified the folloing of Rod Roark's files:
 
 /openemr/interface/cmsportal/list_requests.php
+
 /openemr/interface/cmsportal/portal.inc.php
+
+/openemr/interface/forms/LBF/new.php
+
+
