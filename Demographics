@@ -16,8 +16,8 @@ Enter information here for the client I will be treating.<br><br>
 		[text* lname id:lname ]<br><br>
 	</li>
 	<li>
-		<label for="DOB">Date of Birth <strong><FONT COLOR="RED">*</FONT></strong></label>
-		[date* DOB id:DOB ]<br><br>
+		<label for="dob">Date of Birth <strong><FONT COLOR="RED">*</FONT></strong></label>
+		[date* dob id:dob ]<br><br>
 	</li>
 	<li>
 		<label for="email">Email <strong><FONT COLOR="RED">*</FONT></strong></label>
