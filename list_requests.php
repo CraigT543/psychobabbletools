@@ -162,9 +162,6 @@ function openRequest(postid, type) {
  if (type.indexOf('Insurance') == 0) {
   document.location.href = 'insurance_form.php?postid=' + postid;
  } else
- if (type.indexOf('Insurance') == 0) {
-  document.location.href = 'insurance_form.php?postid=' + postid;
- } else
  if (type.indexOf('History') == 0) {
   document.location.href = 'history_form.php?postid=' + postid;
  } else
@@ -223,8 +220,7 @@ $form_patient = !empty($_POST['form_patient']);
 $result = cms_portal_call(array(
   'action'    => 'list',
   'date_from' => $form_from_date,
-  'date_to'   => $form_to_date,
-));
+  'date_to'   => $form_to_date));
 
 if ($result['errmsg']) {
     echo "<font color='red'>" . text($result['errmsg']) . "</font><br />\n";
