@@ -23,11 +23,17 @@ You will also need to make the following modifications to the forms at /openemr/
 	floatval($_REQUEST['postid'])
 
 history_form.php line 20
+
 insurance_form.php line 154
+
 issue_form.php line 99
+
 lbf_form.php line 20
+
 patient_form.php line 20
+
 patient_select.php line 28
+
 upload_form.php line 48
 
 I have included the following modifications of Rod Roark's files:
