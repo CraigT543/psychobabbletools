@@ -242,13 +242,13 @@ function action_list($date_from='', $date_to='') {
 	"WHERE (p.post_type = 'fep_message' AND uf.user_login = %s " .
 	"OR p.post_type = 'fep_message' AND ut.user_login = %s) AND pm_delete.post_id IS NULL AND pm_clear.post_id IS NULL";
   $qparms = array($curID, $curID, $admin_user_login, $admin_user_login);
-  if ($post_date_from) {
+  if ($date_from) {
 	$query .= " AND p.post_date >= %s";
-	$qparms[] = "$post_date_from 00:00:00";
+	$qparms[] = "$date_from 00:00:00";
   }
-  if ($post_date_to) {
+  if ($date_to) {
 	$query .= " AND p.post_date <= %s";
-	$qparms[] = "$post_date_to 23:59:59";
+	$qparms[] = "$date_to 23:59:59";
   }
   $query .= " ORDER BY p.post_date";
   $query = $wpdb->prepare($query, $qparms);
