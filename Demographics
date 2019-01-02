@@ -75,6 +75,8 @@ Enter information here for the client I will be treating.<br><br>
 		<label for="ref_providerID">Referring Doctor</label>
 		[text ref_providerID id:ref_providerID ]<br><br>
 	</li>
+	
+[hidden userlogin default:user_login]
 		
 </div>
   </ul>

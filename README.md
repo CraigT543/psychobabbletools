@@ -50,7 +50,27 @@ I have included the following modifications of Rod Roark's files:
 
     /wordpress/wp-content/plugins/sunset-patient-portal/webserve.php
 
-I have also included an example of a Demographics form done in CF7.  All of Rod's Ninja Form templates also work.
+I have also included an example of a Demographics form done in CF7.  
+
+CF7 has made some chages in how it works and it breaks some functioning with CFCB unless the folloing is added to every form:
+
+    [hidden userlogin default:user_login]
+	
+And the following function needs to be added to functions.php in WordPress:
+
+	//Add Submitted Login to CF7 forms where [hidden userlogin default:user_login]
+	function filter_add_cf7_submitted_login($formData) {
+			$submission = WPCF7_Submission::get_instance();
+			if ( $submission ) {
+				$posted_data = $submission->get_posted_data();
+				$formData->user = $posted_data['userlogin']; // string user name if submitter was logged in. May be null
+			}
+		return $formData;
+	}
+	add_filter('cfdb_form_data', 'filter_add_cf7_submitted_login');		
+
+
+All of Rod's Ninja Form templates also work.
 
 You will also need to be running a forms application like CF7, Gravity, or Ninja Forms etc.
 
