@@ -36,7 +36,7 @@ patient_select.php line 28
 
 upload_form.php line 50
 
-You will also need to modify /openemr/interface/forms/LBF/new.php and change lines 80 and 81 to from intval to floatval as such:
+You will also need to modify /openemr/interface/forms/LBF/new.php and change lines 82 and 83 to from intval to floatval as such:
 
     $formid = isset($_GET['id']) ? floatval($_GET['id']) : 0;
     $portalid = isset($_GET['portalid']) ? floatval($_GET['portalid']) : 0;
