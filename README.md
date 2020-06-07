@@ -32,9 +32,9 @@ lbf_form.php line 20
 
 patient_form.php line 20
 
-patient_select.php line 28
+patient_select.php line 30
 
-upload_form.php line 48
+upload_form.php line 50
 
 You will also need to modify /openemr/interface/forms/LBF/new.php and change lines 82 and 83 to from intval to floatval as such:
 
